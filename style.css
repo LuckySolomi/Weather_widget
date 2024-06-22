@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 375px;
+  margin: 0;
+  font-family: "Roboto", Helvetica;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.header-with-logo {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px;
+}
+
+main {
+  margin: 15px;
+}
+
+.city-input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.city-input {
+  width: 100%;
+  height: 49px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 300;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #494949;
+  cursor: pointer;
+  user-select: none;
+}
+
+.clear-btn:hover {
+  color: red;
+}
+
+.pointed-city {
+  margin-left: 10px;
+  font-size: 10px;
+}
+
+.loading {
+  display: none;
+  text-align: center;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  background: #ff4f00;
+  color: white;
+}
+
+.current-day {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  height: 108px;
+  border-radius: 10px;
+  background: #ff4f00;
+  color: white;
+}
+
+.current-temperature {
+  font-weight: 700;
+  font-size: 54px;
+  margin: 3px;
+}
+
+.additional-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.feel-tem {
+  font-weight: 400;
+  margin: 0;
+}
+
+.max-temp {
+  font-weight: 500;
+  font-size: 17px;
+  margin: 0;
+}
+
+.location-info {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.current-type-weather {
+  font-weight: 700;
+  margin: 0;
+}
+
+.current-city {
+  margin: 5px 0;
+}
+
+.days-container {
+  margin: 20px 0;
+}
+
+.day-card {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  padding: 10px 0;
+  border-top: 1px solid #dddddd;
+}
+
+.day {
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.card-weather-type {
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+.max-min-block {
+  text-align: end;
+}
+
+.size-of-day-night {
+  font-weight: 300;
+  font-size: 9px;
+  margin: 2px 0;
+}
+
+.weight-of-temp {
+  font-weight: 500;
+  margin: 5px 0;
+}

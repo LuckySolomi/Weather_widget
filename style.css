@@ -153,3 +153,7 @@ main {
   font-weight: 500;
   margin: 5px 0;
 }
+
+.display-block {
+  display: block;
+}

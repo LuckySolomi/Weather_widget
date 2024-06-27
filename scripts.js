@@ -1,29 +1,29 @@
-const KEY = `afcf0addca5b492aae625f7636daafa1`;
+const API_KEY = `afcf0addca5b492aae625f7636daafa1`;
 
 const WEATHER_ICONS = {
-  Sunny: "./img/sunny.svg",
-  Clouds: "./img/cloudly.svg",
-  Rain: "./img/rain.svg",
-  Storm: "./img/storm.svg",
-  Clear: "./img/clear.svg",
-  Snow: "./img/strong-snow.svg",
-  Windy: "./img/windy.svg",
+  sunny: "./img/sunny.svg",
+  clouds: "./img/cloudly.svg",
+  rain: "./img/rain.svg",
+  storm: "./img/storm.svg",
+  clear: "./img/clear.svg",
+  snow: "./img/strong-snow.svg",
+  windy: "./img/windy.svg",
 };
-
-let loadingBlock = document.querySelector(".loading");
 
 city.addEventListener("keydown", async function (event) {
   if (event.key === "Enter") {
     const inputCity = event.target.value.trim();
-    console.log(inputCity);
     try {
-      loadingBlock.style.display = "block";
+      weatherBlock.innerHTML = "";
+      daysContainer.innerHTML = "";
+      loading.classList.add("display-block");
+      await new Promise((complete) => setTimeout(complete, 1000));
 
       const weatherData = await getWeather(inputCity);
       displayWeather(weatherData);
       displayForecast(weatherData);
 
-      loadingBlock.style.display = "none";
+      loading.classList.remove("display-block");
     } catch (error) {
       console.error("Error in getWeather:", error.message);
       loadingBlock.style.display = "none";
@@ -32,7 +32,7 @@ city.addEventListener("keydown", async function (event) {
 });
 
 async function getWeather(city) {
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=uk&appid=${KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=uk&appid=${API_KEY}`;
   const response = await fetch(url);
   const data = await response.json();
   if (!response.ok) {
@@ -47,7 +47,7 @@ function displayWeather(data) {
   const currentWeather = data.list[0];
   const temperature = Math.round(currentWeather.main.temp);
   const feelsLike = Math.round(currentWeather.main.feels_like);
-  const weatherType = currentWeather.weather[0].main;
+  const weatherType = currentWeather.weather[0].main.toLowerCase();
   const icon = WEATHER_ICONS[weatherType] || "./img/sunny.svg";
 
   weatherBlock.innerHTML = `
@@ -73,8 +73,7 @@ function displayWeather(data) {
 }
 
 function displayForecast(data) {
-  const container = document.querySelector(".days-container");
-  container.innerHTML = "";
+  daysContainer.innerHTML = "";
 
   const dailyData = {};
 
@@ -83,7 +82,7 @@ function displayForecast(data) {
     const day = date.toLocaleDateString("en-US", { weekday: "short" });
 
     if (!dailyData[day]) {
-      const weatherType = item.weather[0].main;
+      const weatherType = item.weather[0].main.toLowerCase();
       const icon = WEATHER_ICONS[weatherType] || "./img/sunny.svg";
       const dayTemp = `${Math.round(item.main.temp_max)} °C`;
       const nightTemp = `${Math.round(item.main.temp_min)} °C`;
@@ -100,7 +99,7 @@ function displayForecast(data) {
 
   Object.values(dailyData).forEach((data) => {
     const card = createWeatherCard(data);
-    container.appendChild(card);
+    daysContainer.appendChild(card);
   });
 }
 
@@ -120,7 +119,7 @@ function createWeatherCard(data) {
 }
 
 function clearInput() {
-  document.getElementById("city").value = "";
+  city.value = "";
   weatherBlock.innerHTML = "";
-  document.querySelector(".days-container").innerHTML = "";
+  daysContainer.innerHTML = "";
 }
